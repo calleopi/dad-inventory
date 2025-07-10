@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Personal Website</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="home-page">
+
+  <!-- Top Navigation -->
+  <header class="top-bar">
+    <img src="assets/icon.png" alt="Logo" class="logo" />
+    <nav class="nav-menu" id="navMenu">
+      <a class="nav-link active" href="#">HOME</a>
+      <a class="nav-link" href="list.html">LIST NOTES</a>
+      <a class="nav-link" href="bin.html">BIN</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <main class="hero-section">
+    <img src="assets/profile.png" alt="Profile" class="avatar" />
+    <div class="hero-text">
+      <p class="name-label"><i>MARIO SANTOS</i></p>
+      <h1>PERSONAL <br /> WEBSITE</h1>
+      <p class="subtitle">MY OWN INVENTORY</p>
+      <p class="private-label">PRIVATE</p>
+    </div>
+  </main>
+
+  <!-- Floating Add Button -->
+  <button class="floating-add" onclick="location.href='note.html'">＋</button>
+
+  <script>
+    function toggleNav() {
+      document.getElementById("navMenu").classList.toggle("show");
+    }
+  </script>
+</body>
+</html>

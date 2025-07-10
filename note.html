@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Note</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="note-page">
+
+  <!-- Top Navigation -->
+  <header class="top-bar">
+    <img src="assets/icon.png" alt="Logo" class="logo" />
+    <nav class="nav-menu" id="navMenu">
+      <a class="nav-link" href="index.html">HOME</a>
+      <a class="nav-link" href="list.html">LIST NOTES</a>
+      <a class="nav-link" href="bin.html">BIN</a>
+    </nav>
+    <div class="top-right">
+      <a href="list.html" class="add-btn"> 🐈</a>
+    </div>
+  </header>
+
+  <!-- Note Editor -->
+  <main class="note-editor">
+    <input type="text" id="noteTitle" placeholder="Enter title here..." />
+    <textarea id="noteText" placeholder="Type your text here..."></textarea>
+
+    <div class="media-section">
+      <!-- Add image -->
+      <button class="add-btn" onclick="document.getElementById('imageInput').click()">＋ ADD IMAGE</button>
+      <input type="file" id="imageInput" accept="image/*" style="display:none;" />
+      <img id="noteImage" style="display:none;" />
+
+      <!-- Add link -->
+      <label style="display:block; margin-top:20px;">Add Link:</label>
+      <input type="text" id="noteLink" placeholder="https://example.com" />
+    </div>
+
+    <!-- 📌 Pin Checkbox -->
+    <label style="display:flex; align-items:center; gap:10px; margin-top:20px;">
+      <input type="checkbox" id="pinNote" />
+      Pin this note to top
+    </label>
+
+    <button class="add-btn" onclick="saveNote()">SAVE NOTE</button>
+  </main>
+
+  <button class="floating-add" onclick="location.href='note.html'">＋</button>
+
+  <script src="script.js"></script>
+  <script>
+    const noteId = new URLSearchParams(window.location.search).get("id") || generateId();
+    const notes = getNotes();
+    let existing = notes.find(n => n.id === noteId);
+
+    // Load existing data if editing
+    if (existing) {
+      document.getElementById("noteTitle").value = existing.title || "";
+      document.getElementById("noteText").value = existing.content || "";
+      document.getElementById("noteLink").value = existing.link || "";
+      if (existing.image) {
+        document.getElementById("noteImage").src = existing.image;
+        document.getElementById("noteImage").style.display = "block";
+      }
+      document.getElementById("pinNote").checked = existing.pinned || false;
+    }
+
+    // Image upload handler
+    document.getElementById("imageInput").addEventListener("change", function () {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        document.getElementById("noteImage").src = e.target.result;
+        document.getElementById("noteImage").style.display = "block";
+      };
+      reader.readAsDataURL(this.files[0]);
+    });
+
+    // Save note to localStorage
+    function saveNote() {
+      const updatedNote = {
+        id: noteId,
+        title: document.getElementById("noteTitle").value || "Untitled Note",
+        content: document.getElementById("noteText").value,
+        image: document.getElementById("noteImage").src || "",
+        link: document.getElementById("noteLink").value,
+        pinned: document.getElementById("pinNote").checked
+      };
+
+      const filtered = notes.filter(n => n.id !== noteId);
+      filtered.push(updatedNote);
+      saveNotes(filtered);
+      alert("Note saved!");
+    }
+
+    function toggleNav() {
+      document.getElementById("navMenu").classList.toggle("show");
+    }
+  </script>
+</body>
+</html>

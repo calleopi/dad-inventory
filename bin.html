@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bin</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="list-page">
+
+  <!-- Top Navigation Bar -->
+  <header class="top-bar">
+    <img src="assets/icon.png" alt="Logo" class="logo" />
+
+    <nav class="nav-menu" id="navMenu">
+      <a class="nav-link" href="index.html">HOME</a>
+      <a class="nav-link" href="list.html">LIST NOTES</a>
+      <a class="nav-link active" href="#">BIN</a>
+    </nav>
+  </header>
+
+  <!-- Bin Notes List -->
+  <main class="notes-container" id="binList">
+    <!-- Deleted notes will be loaded here -->
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    const binContainer = document.getElementById("binList");
+    const binNotes = getBinNotes();
+
+    if (binNotes.length === 0) {
+      binContainer.innerHTML = '<p style="color:#ccc; font-size:clamp(14px, 2.5vw, 18px);">Bin is empty.</p>';
+    } else {
+      binNotes.forEach(note => {
+        const div = document.createElement("div");
+        div.className = "note-item";
+
+        div.innerHTML = `
+          <div style="flex-grow:1;">
+            <div style="font-weight:bold; font-size:clamp(16px, 3vw, 20px); color:#f8ac30; margin-bottom:5px;">
+              ${note.title || "Untitled Note"}
+            </div>
+            <div style="color:#aaa; font-size:clamp(14px, 2.5vw, 18px); white-space:pre-line;">
+              ${note.content || "<i>No content</i>"}
+            </div>
+            ${note.image ? `<img src="${note.image}" style="max-width:100%; margin-top:10px; border-radius:10px;">` : ""}
+            ${note.link ? `<div style="margin-top:10px;"><a href="${note.link}" target="_blank" style="color:skyblue;">${note.link}</a></div>` : ""}
+          </div>
+
+          <button class="delete-btn" onclick="restoreNote('${note.id}')">RESTORE</button>
+          <button class="delete-btn" onclick="deletePermanently('${note.id}')">DELETE</button>
+        `;
+        binContainer.appendChild(div);
+      });
+    }
+
+    function restoreNote(id) {
+      const binNotes = getBinNotes();
+      const notes = getNotes();
+      const noteToRestore = binNotes.find(n => n.id === id);
+      if (!noteToRestore) return;
+
+      const updatedBin = binNotes.filter(n => n.id !== id);
+      notes.push(noteToRestore);
+
+      saveNotes(notes);
+      saveBinNotes(updatedBin);
+      location.reload();
+    }
+
+    function deletePermanently(id) {
+      const confirmDelete = confirm("This will permanently delete the note. Continue?");
+      if (!confirmDelete) return;
+
+      const binNotes = getBinNotes();
+      const updatedBin = binNotes.filter(n => n.id !== id);
+      saveBinNotes(updatedBin);
+      location.reload();
+    }
+
+    function toggleNav() {
+      const menu = document.getElementById("navMenu");
+      menu.classList.toggle("show");
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,271 @@
+/* ========== General Reset ========== */
+body {
+  margin: 0;
+  background: #0f0f15;
+  color: #f8ac30;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: clamp(14px, 2.5vw, 18px);
+}
+
+/* ========== HOMEPAGE STYLES ========== */
+.home-page {
+  background: #0f0f15;
+  color: #f8ac30;
+}
+
+/* ========== Top Bar / Nav ========== */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1vw 6vw;
+  background: #0f0f15;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.logo {
+  width: 60px;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 3vw;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.nav-link {
+  color: rgb(249, 210, 120);
+  font-weight: bold;
+  font-size: clamp(16px, 3.5vw, 20px);
+  text-decoration: none;
+}
+
+.nav-link.active,
+.nav-link:hover {
+  color: #f8ac30;
+}
+
+/* ========== Hero Section ========== */
+.hero-section {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 4vh 6vw;
+  flex-wrap: wrap;
+  gap: 4vw;
+}
+
+.avatar {
+  width: 90vw;
+  max-width: 400px;
+}
+
+.hero-text {
+  max-width: 500px;
+}
+
+.name-label {
+  font-size: clamp(14px, 3vw, 20px);
+  color: #ccc;
+  margin-bottom: 2vh;
+}
+
+h1 {
+  font-size: clamp(28px, 10vw, 64px);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.subtitle {
+  font-size: clamp(16px, 5vw, 24px);
+  color: #ccc;
+  margin-top: 2vh;
+}
+
+.private-label {
+  font-size: clamp(12px, 3vw, 16px);
+  margin-top: 2vh;
+  color: #999;
+}
+
+/* ========== LIST + NOTE PAGES ========== */
+.notes-container {
+  padding: 4vh 6vw;
+}
+
+.note-item {
+  display: flex;
+  justify-content: flex-start;
+  background: transparent;
+  margin-bottom: 4vw;
+  gap: 2vw;
+  flex-wrap: wrap;
+}
+
+.note-title {
+  background: #f8ac30;
+  border: none;
+  padding: 4vw 5vw;
+  font-weight: bold;
+  border-radius: 2vw;
+  font-size: clamp(16px, 4vw, 20px);
+  cursor: pointer;
+  text-align: left;
+  flex-grow: 1;
+}
+
+.delete-btn {
+  background: #f8ac30;
+  border: none;
+  padding: 4vw 5vw;
+  font-weight: bold;
+  font-size: clamp(14px, 3.5vw, 18px);
+  border-radius: 2vw;
+  cursor: pointer;
+}
+
+/* ========== Note Editor ========== */
+.note-editor {
+  padding: 4vh 6vw;
+}
+
+textarea {
+  width: 100%;
+  height: 30vh;
+  padding: 3vw;
+  font-size: clamp(14px, 3.5vw, 18px);
+  background: #f8ac30;
+  border: none;
+  border-radius: 1vw;
+  resize: none;
+  color: black;
+  box-sizing: border-box;
+  margin-bottom: 2vw;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding:1vw;
+  font-size: clamp(14px, 3.5vw, 18px);
+  background-color: #292929;
+  border: none;
+  border-radius: 1vw;
+  color: hsl(42, 85%, 69%);
+  box-sizing: border-box;
+  margin-bottom: 1vw;
+}
+
+input[type="file"] {
+  width: 100%;
+  margin-top: 2vw;
+  padding: 2vw;
+  border-radius: 1vw;
+  font-size: clamp(14px, 3.5vw, 18px);
+  box-sizing: border-box;
+  background-color: #292929;
+  color: hsl(42, 85%, 69%);
+}
+
+input[type="checkbox"] {
+  accent-color: hsl(42, 85%, 69%);
+}
+
+.add-btn {
+  background-color: #f8ac30;
+  color: #0f0f15;
+  border: auto;
+  padding: 1vw;
+  font-size: clamp(14px, 3.5vw, 18px);
+  border-radius: 1vw;
+  cursor: pointer;
+  margin-top: 1vw;
+  display: inline-block;
+  width: auto;
+}
+
+#noteImage {
+  max-width: 100%;
+  height: auto;
+  margin-top: 3vw;
+  border-radius: 2vw;
+}
+
+/* ========== Floating Add Button ========== */
+.floating-add {
+  position: fixed;
+  bottom: 4vw;
+  right: 4vw;
+  background-color: #f8ac30;
+  color: hsl(42, 85%, 69%);
+  font-size: clamp(24px, 6vw, 40px);
+  border: none;
+  border-radius: 50%;
+  width: clamp(50px, 14vw, 80px);
+  height: clamp(50px, 14vw, 80px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ========== Responsive (Mobile) ========== */
+@media (max-width: 768px) {
+  .top-bar {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2vw;
+  }
+
+  .logo {
+    width: 14vw;
+    margin: 0;
+  }
+
+  .nav-menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2vw;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    width: auto;
+    padding: 0;
+    background: transparent;
+  }
+
+  .nav-link {
+    font-size: clamp(14px, 3vw, 18px);
+    padding: 1vw 1vw;
+    border-top: none;
+    width: auto;
+  }
+
+  .top-right {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 2vw;
+  }
+
+  .note-title,
+  .delete-btn,
+  .add-btn {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: #f8ac30;
+    color: #0f0f15;
+    border: auto;
+    padding: 1.5vw;
+    font-size: 20px;
+    border-radius: 1vw;
+    cursor: pointer;
+    margin-top: 1vw;
+    display: inline-block;
+    width: auto;
+  
+  }
+}
